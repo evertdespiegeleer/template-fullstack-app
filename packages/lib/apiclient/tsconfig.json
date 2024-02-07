@@ -1,0 +1,13 @@
+{
+    "extends": "../../../tsconfig.lib.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+    },
+    "include": [
+        "./src",
+        "./scripts",
+        "./*.config.ts",
+        "../../../app/backend/src/server.ts"
+    ],
+}

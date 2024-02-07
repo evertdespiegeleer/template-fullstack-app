@@ -1,0 +1,19 @@
+{
+  "name": "apiclient",
+  "version": "0.0.0",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "type": "module",
+  "scripts": {
+    "start:dev": "node --loader ts-node/esm ./src/main.ts",
+    "build": "tsc -p ./tsconfig.build.json",
+    "generate": "orval --config ./orval.config.ts",
+    "prebuild": "./scripts/extract.ts && npm run generate"
+  },
+  "devDependencies": {
+    "orval": "^6.24.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  }
+}

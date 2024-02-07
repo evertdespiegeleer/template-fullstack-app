@@ -1,0 +1,23 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres:15
+    ports:
+      - 12432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+    volumes:
+      - ./_data/postgres:/var/lib/postgresql/data
+  app:
+    build:
+      context: .
+      dockerfile: containers/dev.Dockerfile
+    ports:
+      - "12000-12999:12000-12999"
+    env_file: .env
+    volumes:
+      - ./packages/app/backend/src:/app/packages/app/backend/src
+      - ./packages/app/frontend/src:/app/packages/app/frontend/src
+      - ./packages/lib:/app/packages/lib
