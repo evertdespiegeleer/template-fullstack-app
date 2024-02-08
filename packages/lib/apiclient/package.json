@@ -5,8 +5,9 @@
   "types": "dist/main.d.ts",
   "type": "module",
   "scripts": {
-    "start:dev": "node --loader ts-node/esm ./src/main.ts",
+    "start:dev": "npm run watch",
     "build": "tsc -p ./tsconfig.build.json",
+    "watch": "nodemon -q --watch ../../app/backend/src -e ts -x \"npm run build\"",
     "generate": "orval --config ./orval.config.ts",
     "prebuild": "./scripts/extract.ts && npm run generate"
   },

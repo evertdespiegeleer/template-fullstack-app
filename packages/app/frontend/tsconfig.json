@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.react.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "sourceRoot": "src"
+  },
+  "include": [
+    "./src",
+    "./*.config.ts"
+  ]
+}

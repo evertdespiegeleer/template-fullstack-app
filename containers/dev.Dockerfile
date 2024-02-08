@@ -3,7 +3,7 @@ FROM node:20
 WORKDIR /app
 
 COPY package*.json ./
-COPY *config*.json ./
+COPY *config*.* ./
 COPY .* ./
 
 COPY packages ./packages

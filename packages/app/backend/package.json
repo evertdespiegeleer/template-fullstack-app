@@ -1,11 +1,13 @@
 {
   "name": "backend",
+  "private": true,
   "version": "0.0.0",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "type": "module",
   "scripts": {
-    "start:dev": "node --loader ts-node/esm ./src/main.ts",
+    "start:dev": "nodemon --exec \"node --inspect --loader ts-node/esm\" ./src/main.ts",
+    "start": "node ./dist/main.js",
     "build": "tsc -p ./tsconfig.build.json"
   },
   "dependencies": {
