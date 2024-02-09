@@ -6,14 +6,11 @@ on:
 jobs:
   lint-fix:
     name: Run eslint and push potentional changes
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-    
-      - name: Install deps
-        run: apk add coreutils jq bash
 
       - name: Use Node.js
         uses: actions/setup-node@v4
