@@ -2,8 +2,8 @@
 
 ## About
 
-This is a template repo for a fullstack application.
-It's a WIP. 🚨
+This is a WIP template monorepo for a fullstack application.
+
 It's built around the following technologies:
 - Typescript
 - React with Vite frontend

@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:15
     ports:
-      - ${POSTGRES_PORT}:5432
+      - ${EXTERNAL_POSTGRES_PORT}:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
