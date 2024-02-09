@@ -31,7 +31,7 @@ jobs:
         uses: fregante/setup-git-user@v1
 
       - name: Commit and push if changed
-        if: steps.git-diff-check.outputs.modified == 'true'
+        if: ${{ steps.git-diff-check.outputs.modified }} == 'true'
         run: |
           git commit -am "style: fix code style"
           git push
