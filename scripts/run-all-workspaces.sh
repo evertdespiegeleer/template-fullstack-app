@@ -1,13 +1,15 @@
 #!/bin/sh
 
-command=$@
+command="$@"
 
 workspace_locations=$(npm query .workspace | jq -r '.[].location')
 
-concurrentply_command="npx concurrently --kill-others"
-for location in ${workspace_locations};
-do
-    concurrentply_command+=" \"(cd $location;$command)\""
+concurrently_command="npx concurrently --kill-others"
+for location in ${workspace_locations}; do
+    concurrently_subcommand="(cd $location; ${command})"
+    concurrently_command="$concurrently_command \"$concurrently_subcommand\""
 done
 
-eval $concurrentply_command
+echo "$concurrently_command"
+
+eval "$concurrently_command"

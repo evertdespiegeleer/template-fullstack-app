@@ -9,26 +9,29 @@ import type {
   AxiosRequestConfig,
   AxiosResponse
 } from 'axios'
-export interface HellogetGreeting200 {
-  greeting: string
-}
+export type HellogetGreeting200 = {
+  greeting: string;
+};
 
-export interface HellogetGreetingParams {
-  name?: string
-}
+export type HellogetGreetingParams = {
+name?: string;
+};
 
-/**
+
+
+
+
+  /**
  * @summary getGreeting
  */
-export const hellogetGreeting = async <TData = AxiosResponse<HellogetGreeting200>>(
-  params?: HellogetGreetingParams, options?: AxiosRequestConfig
-): Promise<TData> => {
-  return await axios.get(
-    '/hello', {
-      ...options,
-      params: { ...params, ...options?.params }
-    }
-  )
-}
+export const hellogetGreeting = <TData = AxiosResponse<HellogetGreeting200>>(
+    params?: HellogetGreetingParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/hello`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
 export type HellogetGreetingResult = AxiosResponse<HellogetGreeting200>

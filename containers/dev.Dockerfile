@@ -1,4 +1,6 @@
-FROM node:20
+FROM node:20-alpine
+
+RUN apk add coreutils jq bash
 
 WORKDIR /app
 

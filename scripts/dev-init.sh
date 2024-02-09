@@ -7,5 +7,13 @@ then
     cp .env.example .env
 fi
 
+# Load the .env file without overriding already set environment variables
+curenv="$(export -p)"
+set -a; source ./.env; set +a
+eval "${curenv%x}"
+
 # Install dependencies
 npm ci --verbose
+
+# Build libs in the right order
+npm run -w packages/lib/apiclient build

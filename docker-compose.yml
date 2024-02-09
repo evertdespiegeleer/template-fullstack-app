@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:15
     ports:
-      - 12432:5432
+      - ${POSTGRES_PORT}:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -15,9 +15,10 @@ services:
       context: .
       dockerfile: containers/dev.Dockerfile
     ports:
-      - "12000-12999:12000-12999"
+      - ${PROJECT_PORT_RANGE_START}-${PROJECT_PORT_RANGE_END}:${PROJECT_PORT_RANGE_START}-${PROJECT_PORT_RANGE_END}
     env_file: .env
     volumes:
+      - ./scripts:/app/scripts
       - ./packages/app/backend/src:/app/packages/app/backend/src
       - ./packages/app/frontend/src:/app/packages/app/frontend/src
       - ./packages/lib:/app/packages/lib

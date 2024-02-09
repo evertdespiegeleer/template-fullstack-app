@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start:dev": "vite",
+    "start:dev": "npm run inject-env && vite",
     "build": "tsc -p ./tsconfig.build.json && vite build",
+    "inject-env": "./scripts/inject-env.sh",
     "preview": "vite preview"
   },
   "dependencies": {

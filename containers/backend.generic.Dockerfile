@@ -3,6 +3,8 @@ FROM node:20-alpine as setup
 
 ARG PACKAGE_PATH
 
+RUN apk add coreutils jq
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -55,6 +57,6 @@ COPY --from=setup /app/${PACKAGE_PATH} ./${PACKAGE_PATH}
 RUN chown -R node:node /app
 USER node
 
-WORKDIR /app/packages/app/${PACKAGE_PATH}
+WORKDIR /app/${PACKAGE_PATH}
 
 CMD ["npm", "run", "start"]

@@ -7,6 +7,8 @@
   },
   "include": [
     "./src",
-    "./*.config.ts"
+    "./*.config.ts",
+    "./public",
+    "./scripts"
   ]
 }

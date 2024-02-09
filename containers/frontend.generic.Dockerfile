@@ -3,6 +3,8 @@ FROM node:20-alpine as setup
 
 ARG PACKAGE_PATH
 
+RUN apk add coreutils jq bash
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -42,9 +44,15 @@ FROM nginx:stable-alpine
 
 ARG PACKAGE_PATH
 
+RUN apk add coreutils jq bash
+
 COPY --from=build /app/${PACKAGE_PATH}/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/${PACKAGE_PATH}/dist /usr/share/nginx/html
 
 WORKDIR /app
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY ${PACKAGE_PATH}/env.template.json ./
+COPY ${PACKAGE_PATH}/scripts ./scripts
+COPY containers/frontend-entrypoint.sh ./entrypoint.sh
+
+CMD ["/app/entrypoint.sh"]
