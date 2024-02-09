@@ -9,7 +9,7 @@ fi
 
 # Load the .env file without overriding already set environment variables
 curenv="$(export -p)"
-set -a; source ./.env; set +a
+set -a; . ./.env; set +a
 eval "${curenv%x}"
 
 # Install dependencies
