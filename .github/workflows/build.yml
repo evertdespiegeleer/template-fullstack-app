@@ -19,8 +19,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
             images: |
-                name/app
-                ghcr.io/username/app
+                ${{github.repository}}
+                ghcr.io/${{github.repository}}
 
       - name: Login to DockerHub
         if: github.event_name != 'pull_request'
