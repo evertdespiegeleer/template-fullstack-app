@@ -1,5 +1,6 @@
 const configVars = [
-  'SOME_RUNTIME_VAR_USED_IN_THE_FRONTEND'
+  'SOME_RUNTIME_VAR_USED_IN_THE_FRONTEND',
+  'API_URL'
 ] as const satisfies string[]
 
 type EnvName = (typeof configVars)[number]

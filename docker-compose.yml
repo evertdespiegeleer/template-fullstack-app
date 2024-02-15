@@ -18,7 +18,16 @@ services:
       - ${PROJECT_PORT_RANGE_START}-${PROJECT_PORT_RANGE_END}:${PROJECT_PORT_RANGE_START}-${PROJECT_PORT_RANGE_END}
     env_file: .env
     volumes:
+      # Scripts  
       - ./scripts:/app/scripts
+      # Backend
       - ./packages/app/backend/src:/app/packages/app/backend/src
+      # Frontend
       - ./packages/app/frontend/src:/app/packages/app/frontend/src
+      - ./packages/app/frontend/vite.config.ts:/app/packages/app/frontend/vite.config.ts
+      - ./packages/app/frontend/scripts:/app/packages/app/frontend/scripts
+      - ./packages/app/frontend/public:/app/packages/app/frontend/public
+      - ./packages/app/frontend/env.template.json:/app/packages/app/frontend/env.template.json
+      - ./packages/app/frontend/index.html:/app/packages/app/frontend/index.html
+      # Libraries
       - ./packages/lib:/app/packages/lib

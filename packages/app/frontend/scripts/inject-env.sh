@@ -24,10 +24,17 @@ done <<< "$templateObj"
 
 echo '💉 Injecting frontend runtime env vars'
 
+# Start the JSON object
 echo "{" > "${env_out_dir}/env.json"
-# Write the environment variables to env.json
+# Write the environment variables to env.json, adding commas except for the last item
 for ((i=0; i<${#keys[@]}; i++)); do
-    echo "\"${keys[i]}\": \"${values[i]}\"" >> "${env_out_dir}/env.json"
+    if [ $i -eq $(( ${#keys[@]} - 1 )) ]; then
+        # Last item, do not add a comma
+        echo "  \"${keys[i]}\": \"${values[i]}\"" >> "${env_out_dir}/env.json"
+    else
+        # Not the last item, add a comma
+        echo "  \"${keys[i]}\": \"${values[i]}\"," >> "${env_out_dir}/env.json"
+    fi
 done
 echo '}' >> "${env_out_dir}/env.json"
 

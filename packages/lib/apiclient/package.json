@@ -5,11 +5,11 @@
   "types": "dist/main.d.ts",
   "type": "module",
   "scripts": {
-    "start:dev": "npm run watch",
-    "build": "tsc -p ./tsconfig.build.json",
-    "watch": "nodemon -q --watch ../../app/backend/src -e ts -x \"npm run build\"",
-    "generate": "orval --config ./orval.config.ts",
-    "prebuild": "./scripts/extract.ts && npm run generate"
+    "start:dev": "concurrently \"npm run watch:backend\" \"npm run build:watch\"",
+    "build:watch": "nodemon -q --watch ./src -e ts -x \"tsc -p ./tsconfig.build.json\"",
+    "watch:backend": "nodemon -q --watch ../../app/backend/src -e ts -x \"npm run generate\"",
+    "build": "npm run generate && tsc -p ./tsconfig.build.json",
+    "generate": "./scripts/extract.ts && orval --config ./orval.config.ts && ./scripts/fix-esm.sh"
   },
   "devDependencies": {
     "orval": "^6.24.0"

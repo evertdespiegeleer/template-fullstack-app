@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --loader ts-node/esm
+#!/usr/bin/env -S node --loader ts-node/esm --import=./scripts/logError.js
 import url from 'node:url'
 import path from 'node:path'
 import { exit } from 'node:process'
