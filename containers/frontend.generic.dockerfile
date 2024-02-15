@@ -35,7 +35,6 @@ COPY --from=setup /app/node_modules ./node_modules
 
 ### Build the package
 ENV NODE_ENV=production
-RUN npm ci
 RUN npm run -w ${PACKAGE_PATH} build
 RUN npm prune --production
 
