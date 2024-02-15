@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push
+
+jobs:
+  build-images:
+    name: Build container images and push them to registry
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+
+    #   - name: Login to DockerHub
+    #     if: github.event_name != 'pull_request'
+    #     uses: docker/login-action@v3
+    #     with:
+    #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  
+      - name: Build and push frontend
+        uses: docker/build-push-action@v5
+        with:
+            context: .
+            file: containers/frontend.generic.dockerfile
+            build-args: |
+                PACKAGE_PATH=packages/app/frontend
+            push: ${{ github.event_name != 'pull_request' }}
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v5
+        with:
+            context: .
+            file: containers/backend.generic.dockerfile
+            build-args: |
+                PACKAGE_PATH=packages/app/backend
+            push: ${{ github.event_name != 'pull_request' }}
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}

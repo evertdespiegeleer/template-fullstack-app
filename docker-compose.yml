@@ -13,7 +13,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: containers/dev.Dockerfile
+      dockerfile: containers/dev.dockerfile
     ports:
       - ${PROJECT_PORT_RANGE_START}-${PROJECT_PORT_RANGE_END}:${PROJECT_PORT_RANGE_START}-${PROJECT_PORT_RANGE_END}
     env_file: .env
