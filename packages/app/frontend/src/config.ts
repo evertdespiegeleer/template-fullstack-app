@@ -1,21 +1,29 @@
-const configVars = [
-  'SOME_RUNTIME_VAR_USED_IN_THE_FRONTEND',
-  'API_URL'
-] as const satisfies string[]
+import { z } from 'zod'
 
-type EnvName = (typeof configVars)[number]
+const zConfig = z.object({
+  API_URL: z.string().min(1),
+  SOME_RUNTIME_VAR_USED_IN_THE_FRONTEND: z.string().min(1)
+})
 
-type Config = Record<string, EnvName>
+type Config = z.infer<typeof zConfig>
+
+type DeepPartial<T> = T extends object ? {
+  [P in keyof T]?: DeepPartial<T[P]>;
+} : T
 
 declare global {
   interface Window {
-    __env__: Partial<Config>
+    __env__: Partial<DeepPartial<Config>>
   }
 }
 
-export const getConfig = (envName: EnvName, errorIfNull: boolean) => {
-  if (window.__env__[envName] == null && errorIfNull) throw new Error(`Missing env var ${envName}.`)
-  return window.__env__[envName]
+let config: Config
+
+try {
+  config = zConfig.parse(window.__env__)
+} catch (e: any) {
+  console.error('Runtime configuration issue', e)
+  throw e
 }
 
-export const getAllConfig = () => window.__env__
+export const getConfig = () => config

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { getAllConfig } from './config.js'
+import { getConfig } from './config.js'
 import { hellogetGreeting } from 'apiclient'
 
 function App () {
@@ -28,7 +28,7 @@ function App () {
         padding: '2em',
         borderRadius: '1em'
       }}>
-        {JSON.stringify(getAllConfig(), null, 4)}
+        {JSON.stringify(getConfig(), null, 4)}
       </pre>
     </>
   )

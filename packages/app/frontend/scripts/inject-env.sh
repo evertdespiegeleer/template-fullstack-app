@@ -15,11 +15,14 @@ keys=()
 values=()
 
 # Iterate over key-value pairs in the templateObj
-while IFS='=' read -r key value; do
-    keys+=("$key")
-    # Get the value of the environment variable or set to null if not present
-    value="${!key:-null}"
-    values+=("$value")
+while IFS='=' read -r key template_value; do
+    # Get the value of the environment variable
+    actual_value="${!key}"
+    # Only proceed if the variable is defined and not empty
+    if [ ! -z "${actual_value}" ]; then
+        keys+=("$key")
+        values+=("${actual_value}")
+    fi
 done <<< "$templateObj"
 
 echo '💉 Injecting frontend runtime env vars'
