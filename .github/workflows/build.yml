@@ -59,13 +59,14 @@ jobs:
             tags: ${{ steps.meta-backend.outputs.tags }}
             labels: ${{ steps.meta-backend.outputs.labels }}
   dependabot:
-    name: 'Dependabot'
-    needs: ['build-images'] # After checks, merge Dependabot PRs
+    name: 'Set dependabot PR to auto-merge'
+    needs:
+      - build-images
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
     steps:
     - name: Enable auto-merge for Dependabot PRs
-      run: gh pr merge --auto --merge "$PR_URL" # Use Github CLI to merge automatically the PR
+      run: gh pr merge --auto --merge "$PR_URL"
       env:
         PR_URL: ${{github.event.pull_request.html_url}}
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
