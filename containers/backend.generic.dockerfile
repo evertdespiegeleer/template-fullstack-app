@@ -1,5 +1,5 @@
 # Setup
-FROM node:20-alpine as setup
+FROM node:21-alpine as setup
 
 ARG PACKAGE_PATH
 
@@ -20,7 +20,7 @@ ENV NODE_ENV=development
 RUN npm run init
 
 # Build
-FROM node:20-alpine as build
+FROM node:21-alpine as build
 
 ARG PACKAGE_PATH
 
@@ -39,7 +39,7 @@ RUN npm run -w ${PACKAGE_PATH} build
 RUN npm prune --production
 
 # Run
-FROM node:20-alpine as run
+FROM node:21-alpine as run
 
 ARG PACKAGE_PATH
 ENV NODE_ENV=production
