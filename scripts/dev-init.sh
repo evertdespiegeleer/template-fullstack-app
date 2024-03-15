@@ -13,7 +13,7 @@ set -a; . ./.env; set +a
 eval "${curenv%x}"
 
 # Install dependencies
-npm ci --verbose --proxy http://docker.for.mac.localhost:8888
+npm ci --verbose
 
 # Build libs in the right order
 npm run -w packages/lib/apiclient build
