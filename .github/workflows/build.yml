@@ -58,15 +58,3 @@ jobs:
             push: true
             tags: ${{ steps.meta-backend.outputs.tags }}
             labels: ${{ steps.meta-backend.outputs.labels }}
-  dependabot:
-    name: 'Set dependabot PR to auto-merge'
-    needs:
-      - build-images
-    runs-on: ubuntu-latest
-    if: ${{ always() && !failure() && !cancelled() && github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
-    steps:
-    - name: Enable auto-merge for Dependabot PRs
-      run: gh pr merge --auto --merge "$PR_URL"
-      env:
-        PR_URL: ${{github.event.pull_request.html_url}}
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
