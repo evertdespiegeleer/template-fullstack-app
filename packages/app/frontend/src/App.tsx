@@ -19,7 +19,7 @@ function App () {
 
       <br /><br />
 
-      Runtime env:
+      Frontend runtime env:
       <pre style={{
         textAlign: 'left',
         fontFamily: 'monospace',
