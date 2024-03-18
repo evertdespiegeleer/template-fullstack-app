@@ -4,7 +4,7 @@ command="$@"
 
 workspace_locations=$(npm query .workspace | jq -r '.[].location')
 
-concurrently_command="npx concurrently --kill-others"
+concurrently_command="npx concurrently --kill-others -c auto"
 names=""
 commands=""
 for location in ${workspace_locations}; do
